@@ -9,7 +9,7 @@ import lombok.Data;
 @Entity
 @Data
 
-public class Board {
+public class Board { //BoardRepository에서 접근하는 Board entity
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

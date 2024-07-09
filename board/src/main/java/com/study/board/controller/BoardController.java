@@ -13,18 +13,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/board")
 public class BoardController {
 
     @Autowired
     private BoardService boardService;
 
-    @GetMapping("/board/write") //localhost:8080/board/write
+    @GetMapping("/write") //localhost:8080/board/write
     public String boardWriteFrom(){
 
         return "boardwrite";
     }
 
-    @PostMapping("/board/writepro")
+    @PostMapping("/writepro")
     public String boardWritePro(Board board, Model model) {
 
         boardService.write(board);
@@ -36,7 +37,7 @@ public class BoardController {
         return "message";
     }
 
-    @GetMapping("/board/list")
+    @GetMapping("/list")
     public String boardList(Model model, @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
 
         Page<Board> list = boardService.boardList(pageable);
@@ -54,14 +55,14 @@ public class BoardController {
         return "boardlist";
     }
 
-    @GetMapping("/board/view")
+    @GetMapping("/view")
     public String boardView(Model model, @RequestParam(name="id") Integer id) {
 
         model.addAttribute("board",boardService.boardView(id));
         return "boardview";
     }
 
-    @GetMapping("/board/delete")
+    @GetMapping("/delete")
     public String boardDelete(@RequestParam(name = "id") Integer id){
 
         boardService.boardDelete(id);
